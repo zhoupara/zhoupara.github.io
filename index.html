@@ -260,6 +260,135 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.padparadccha.cn/2019/10/06/T1006/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="para">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/06/T1006/" itemprop="url">Hexo create</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-06T19:23:01+08:00">
+                2019-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#Hexo create<br>Hexo搭建了很多次，由于是在虚拟机中搭建的<br>由于经常换虚拟机，每次更换搭建的hexo都没有了<br>heox的环境搭建也较麻烦，在此记录</p>
+<h2 id="1-安装git工具"><a href="#1-安装git工具" class="headerlink" title="1.安装git工具"></a>1.安装git工具</h2><p>sudo yum -y install git-all.noarch</p>
+<h2 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h2><p>curl -o- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh" target="_blank" rel="noopener">https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh</a> | bash<br>nvm install node</p>
+<h2 id="3-安装-Hexo"><a href="#3-安装-Hexo" class="headerlink" title="3.安装 Hexo"></a>3.安装 Hexo</h2><p>npm install -g hexo-cli<br>npm install hexo<br>3.1设置hexo环境变量<br>echo ‘PATH=”$PATH:./node_modules/.bin”‘ &gt;&gt; ~/.profile</p>
+<h2 id="4-建站"><a href="#4-建站" class="headerlink" title="4.建站"></a>4.建站</h2><p>hexo init</p>
+<h3 id="4-1-Next-主题"><a href="#4-1-Next-主题" class="headerlink" title="4.1 Next 主题"></a>4.1 Next 主题</h3><p>mkdir themes/next<br>curl -L <a href="https://api.github.com/repos/iissnan/hexo-theme-next/tarball/v5.1.2" target="_blank" rel="noopener">https://api.github.com/repos/iissnan/hexo-theme-next/tarball/v5.1.2</a> | tar -zxv -C themes/next –strip-components=1</p>
+<h3 id="4-2安装本地服务器"><a href="#4-2安装本地服务器" class="headerlink" title="4.2安装本地服务器"></a>4.2安装本地服务器</h3><p>npm install hexo-server –save</p>
+<h2 id="5-hexo和github联系起来"><a href="#5-hexo和github联系起来" class="headerlink" title="5.hexo和github联系起来"></a>5.hexo和github联系起来</h2><h3 id="5-1安装git插件"><a href="#5-1安装git插件" class="headerlink" title="5.1安装git插件"></a>5.1安装git插件</h3><p>npm install hexo-deployer-git –save</p>
+<h3 id="5-2本地添加公钥参考git-syn"><a href="#5-2本地添加公钥参考git-syn" class="headerlink" title="5.2本地添加公钥参考git.syn"></a>5.2本地添加公钥参考git.syn</h3><h3 id="5-3配置Deployment-在-config-yml文件，修改repo值"><a href="#5-3配置Deployment-在-config-yml文件，修改repo值" class="headerlink" title="5.3配置Deployment 在_config.yml文件，修改repo值"></a>5.3配置Deployment 在_config.yml文件，修改repo值</h3><p>deploy:<br>    type: git<br>    repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:padparadccha/padparadccha.github.io.git<br>    branch: master</p>
+<p>##6.部署发布<br>hexo d -g</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.padparadccha.cn/2019/10/06/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -539,7 +668,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -547,6 +676,15 @@
 
           
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
           
 
         </nav>
