@@ -260,6 +260,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.padparadccha.cn/2020/09/24/fileno/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="para">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/24/fileno/" itemprop="url">fileno</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-24T19:33:36+08:00">
+                2020-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h1><h3 id="1-文件描述符的描述"><a href="#1-文件描述符的描述" class="headerlink" title="1.文件描述符的描述"></a>1.文件描述符的描述</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a  file descriptor, a small, nonnegative integer for use in </span><br><span class="line">subsequent system calls (read(2), write(2), lseek(2), fcntl(2), etc.)  </span><br><span class="line"></span><br><span class="line"> --from man 2.6.3</span><br></pre></td></tr></table></figure>
+
+<p>关键词:<br>nonnegative integer  非负整数<br>use in system calls     系统调用使用</p>
+<p>当打开或者创建一个新的文件时，内核向进程返回一个文件描述符<br>用此文件描述符就能读写文件<br>linux一切皆文件，拿到文件描述符，就拿到了linux的钥匙</p>
+<h3 id="2-标准文件描述符"><a href="#2-标准文件描述符" class="headerlink" title="2.标准文件描述符"></a>2.标准文件描述符</h3><p>标准输出文件描述符、标准输入文件描述符、标准错误文件描述符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* Standard file descriptors.  */</span><br><span class="line">#define STDIN_FILENO    0       /* Standard input.  */</span><br><span class="line">#define STDOUT_FILENO   1       /* Standard output.  */</span><br><span class="line">#define STDERR_FILENO   2       /* Standard error output.  */</span><br><span class="line"></span><br><span class="line">---from &lt;unistd.h&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-文件描述符的限制"><a href="#3-文件描述符的限制" class="headerlink" title="3.文件描述符的限制"></a>3.文件描述符的限制</h3><p>使用ulimit -n 进行文件描述符设置当前进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[para ~]$ ulimit -a</span><br><span class="line">core file size          (blocks, -c) 0</span><br><span class="line">data seg size           (kbytes, -d) unlimited</span><br><span class="line">scheduling priority             (-e) 0</span><br><span class="line">file size               (blocks, -f) unlimited</span><br><span class="line">pending signals                 (-i) 7271</span><br><span class="line">max locked memory       (kbytes, -l) 64</span><br><span class="line">max memory size         (kbytes, -m) unlimited</span><br><span class="line">open files                      (-n) 65535           --&gt; 文件描述符限制 65535个</span><br><span class="line">pipe size            (512 bytes, -p) 8</span><br><span class="line">POSIX message queues     (bytes, -q) 819200</span><br><span class="line">real-time priority              (-r) 0</span><br><span class="line">stack size              (kbytes, -s) 8192</span><br><span class="line">cpu time               (seconds, -t) unlimited</span><br><span class="line">max user processes              (-u) 4096</span><br><span class="line">virtual memory          (kbytes, -v) unlimited</span><br><span class="line">file locks                      (-x) unlimited</span><br></pre></td></tr></table></figure>
+
+<p>设置永久生效最大文件描述符限制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">修改 /etc/security/limits.conf</span><br><span class="line"></span><br><span class="line">#End of file</span><br><span class="line">root soft nofile 65535</span><br><span class="line">root hard nofile 65535</span><br><span class="line">para soft nofile 1024</span><br><span class="line">para hard nofile 1024</span><br><span class="line">* soft nofile 65535</span><br><span class="line">* hard nofile 65535</span><br><span class="line"></span><br><span class="line">[para ~]$ ulimit -n</span><br><span class="line">1024</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-文件描述符唯一性"><a href="#4-文件描述符唯一性" class="headerlink" title="4.文件描述符唯一性"></a>4.文件描述符唯一性</h3><p>进程PCB中维护一个文件描述符表，该表的索引值从0开始<br>每个进程都有自己的PCB块，当然也有属于自己的文件描述符表<br><img src="/_posts//fileno/file0.png" alt="Lena"></p>
+<p>此图由unix环境高级编程书籍而来，网上说  linux系统只使用i节点，而不使用v节点 ，知道方法再细研究此问题。</p>
+<p>(1)进程拿到文件描述符fd –&gt; 通过文件描述符表拿到对应文件描述符指针<br>(2)通过指针找到文件表的偏移量，再通过文件偏移找到当前文件指针的位置<br>(3)在通过i节点信息去文件系统进行具体操作</p>
+<h3 id="5-进程结构图"><a href="#5-进程结构图" class="headerlink" title="5.进程结构图"></a>5.进程结构图</h3><p><img src="./fileno1.png" alt="Lena"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.padparadccha.cn/2020/09/13/weekend/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -912,7 +1048,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
