@@ -260,6 +260,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.padparadccha.cn/2020/09/30/func-io/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="para">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/30/func-io/" itemprop="url">func_io</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-30T14:51:53+08:00">
+                2020-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="标准IO和系统IO的效率"><a href="#标准IO和系统IO的效率" class="headerlink" title="标准IO和系统IO的效率"></a>标准IO和系统IO的效率</h1><p>1.本文所讲的系统IO为 UNIX环境下的系统IO函数<br>2.标准IO 创建了一个缓冲区，当刷新缓冲区的后，在调用系统IO进行IO操作。<br>3.标准IO兼容了各种版本的系统IO<br>4.标准IO的 缓冲区(行缓冲、全缓冲，不带缓冲)<br>5.当且仅当标准输入和标准输出并不涉及交互作用设备时，他们才是全缓冲</p>
+<h1 id="系统调用函数"><a href="#系统调用函数" class="headerlink" title="系统调用函数"></a>系统调用函数</h1><p>–&gt;open,close,lseek,read,write</p>
+<h2 id="open"><a href="#open" class="headerlink" title="open"></a>open</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">int open(const char *pathname, int flags);</span><br><span class="line">int open(const char *pathname, int flags, mode_t mode);</span><br><span class="line"></span><br><span class="line">头文件：</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line"></span><br><span class="line">参数</span><br><span class="line">const char *pathname  要打开或创建的文件的名字</span><br><span class="line">int flags</span><br><span class="line">    O_RDONLY 只读</span><br><span class="line">    O_WRONLY 只写</span><br><span class="line">    O_RDWR 可读可写</span><br><span class="line">可选</span><br><span class="line">    O_APPEND  每次写时都加到文件的尾端</span><br><span class="line">    O_CREAT    如此文件不存在则创建它，需与第三参数mode,说明新文件的存取全蝎</span><br><span class="line">        umask --&gt; ~umask | mode --&gt;权限</span><br><span class="line">    O_EXCL  如果同时指定了O_CREAT, 而文件已经存在，则报错，可测试一个文件是否存在，</span><br><span class="line">            如果不存在则创建此文件成文一个原子操作</span><br><span class="line">    O_TRUNC 如果文件存在，而且为只读或只写成功打开，则将其长度截短为0</span><br><span class="line">    O_NOCTTY 如果pathname指的是终端设备，则不将此设备分配为此进程的控制终端</span><br><span class="line">    O_NONBLOCK 如果pathname指的是一个FIFO、一个块特殊文件或一个字符特殊文件，则此选项为此</span><br><span class="line">            文件的本次打开操作和后续的I/O操作设置非阻塞方式</span><br><span class="line"></span><br><span class="line">返回值</span><br></pre></td></tr></table></figure>
+
+<p>fopen 和 open 对比</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FILE *fopen(const char *path, const char *mode);</span><br><span class="line">int open(const char *pathname, int flags);</span><br><span class="line">r    只读 | 文件首                                        --&gt;O_RDONLY  </span><br><span class="line">r+   读写 | 文件首                                        --&gt;O_RDWR</span><br><span class="line">w    有则清空，无则创建 | 只写 | 文件首                     --&gt;O_WRONLY | O_CREAT | O_TRUNC</span><br><span class="line">w+   读写 有则清空，无则创建 | 文件首                       --&gt;O_RDWR | O_CREAT | O_TRUNC</span><br><span class="line">a    有则清空，无则创建 | 追加 | 读写 | 写在文件尾           --&gt;O_RDWR | O_CREAT | O_TRUNC | O_APPEND</span><br><span class="line">a+   读写  有则清空，无则创建 读在文件头、写在文件尾          --&gt;O_RDWR | O_CREAT | O_TRUNC</span><br></pre></td></tr></table></figure>
+
+<h2 id="close"><a href="#close" class="headerlink" title="close"></a>close</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">int close(int fd);</span><br></pre></td></tr></table></figure>
+
+<h2 id="read"><a href="#read" class="headerlink" title="read"></a>read</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">ssize_t read(int fd, void *buf, size_t count);</span><br><span class="line"></span><br><span class="line">返回值：</span><br><span class="line">On success, the number of bytes read is returned (zero indicates end of file), and the file position is  advanced  by this  number.</span><br></pre></td></tr></table></figure>
+
+<h2 id="write"><a href="#write" class="headerlink" title="write"></a>write</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">ssize_t write(int fd, const void *buf, size_t count);</span><br><span class="line"></span><br><span class="line">返回值：</span><br><span class="line">On success, the number of bytes written is returned (zero indicates nothing was written).  On error, -1 is returned, and errno is set appropriately.</span><br></pre></td></tr></table></figure>
+
+<h2 id="lseek"><a href="#lseek" class="headerlink" title="lseek"></a>lseek</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">off_t lseek(int fd, off_t offset, int whence);</span><br><span class="line">参数：</span><br><span class="line">int whence SEEK_SET | SEEK_CUR | SEEK_END</span><br><span class="line">返回值：</span><br><span class="line">returns the resulting offset location as measured in bytes from the beginning of the file.  On error, the  value  (off_t) -1  is  returned  and errno is set to indicate the error.</span><br></pre></td></tr></table></figure>
+
+<h1 id="标准IO操作函数"><a href="#标准IO操作函数" class="headerlink" title="标准IO操作函数"></a>标准IO操作函数</h1><p>–&gt; fopen、fclose、<br>–&gt; getc、putc、fgetc、fputc、getchar<br>–&gt; gets、puts、fgets、fputs<br>–&gt;fread、fwrite<br>–&gt; ftell、fseek、rewind</p>
+<h2 id="fopen-、fclose"><a href="#fopen-、fclose" class="headerlink" title="fopen 、fclose"></a>fopen 、fclose</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">FILE *fopen(const char *path, const char *mode);</span><br><span class="line">r    只读 | 文件首</span><br><span class="line">r+   读写 | 文件首</span><br><span class="line">w    有则清空，无则创建 | 只写 | 文件首</span><br><span class="line">w+   读写 有则清空，无则创建 | 文件首</span><br><span class="line">a    有则清空，无则创建 | 追加 | 读写 | 写在文件尾</span><br><span class="line">a+   读写  有则清空，无则创建 读在文件头、写在文件尾</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int fclose(FILE *fp);</span><br></pre></td></tr></table></figure>
+
+<p>##fgetc、getc、getchar、fputc、putc、putchar</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int fgetc(FILE *stream);</span><br><span class="line">int getc(FILE *stream);</span><br><span class="line">int getchar(void);   ---&gt; equivalent to getc(stdin)</span><br><span class="line">getc 与 fgetc 区别</span><br><span class="line">getc 宏定义  --&gt; _IO_getc</span><br><span class="line">返回值 return the character read as an unsigned char cast to an int or EOF on end of file or error.</span><br><span class="line">-----------------------------------------------------</span><br><span class="line">int fputc(int c, FILE *stream);</span><br><span class="line">int putc(int c, FILE *stream);</span><br><span class="line">int putchar(int c);</span><br><span class="line">返回值 return the character written as an unsigned char cast to an int or EOF on error.</span><br></pre></td></tr></table></figure>
+
+<p>##fgets、gets、 fput、puts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">char *fgets(char *s, int size, FILE *stream);  读取size-1大小的字符长度 第size 用&apos;\0&apos;补充</span><br><span class="line">char *gets(char *s);  有漏洞，慎用</span><br><span class="line">返回值 return s on success, and NULL on error or when end of file occurs while no characters have been read.</span><br><span class="line">-------------------------------------------</span><br><span class="line">int fputs(const char *s, FILE *stream);  writes the string s to stream, without its terminating null byte (&apos;\0&apos;).将字符串的&apos;\0&apos;去掉输出</span><br><span class="line">int puts(const char *s);  writes the string s and a trailing newline to stdout.</span><br><span class="line">返回值 return a nonnegative number on success, or EOF on error</span><br></pre></td></tr></table></figure>
+
+<h2 id="fread、fwrite"><a href="#fread、fwrite" class="headerlink" title="fread、fwrite"></a>fread、fwrite</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);</span><br><span class="line">size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);</span><br><span class="line">返回值 返回读取的次数</span><br><span class="line">return the number of items successfully read or written</span><br><span class="line">If an error occurs, or the end-of-file is reached, the return value is  a  short  item  count</span><br></pre></td></tr></table></figure>
+
+<h2 id="ftell、fseek、rewind"><a href="#ftell、fseek、rewind" class="headerlink" title="ftell、fseek、rewind"></a>ftell、fseek、rewind</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int fseek(FILE *stream, long offset, int whence);  移动位置</span><br><span class="line">long ftell(FILE *stream);    返回文件指针位置</span><br><span class="line">void rewind(FILE *stream);   equivalent (void) fseek(stream, 0L, SEEK_SET)</span><br></pre></td></tr></table></figure>
+
+<h2 id="fseeko、ftello"><a href="#fseeko、ftello" class="headerlink" title="fseeko、ftello"></a>fseeko、ftello</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int fseeko(FILE *stream, off_t offset, int whence); 移动位置</span><br><span class="line">off_t ftello(FILE *stream); 返回文件指针位置</span><br><span class="line"></span><br><span class="line">On many architectures both off_t and long are 32-bit types, but compilation with</span><br><span class="line">#define _FILE_OFFSET_BITS 64</span><br><span class="line">makefile:</span><br><span class="line">CFLAGS+=-D_FILE_OFFSET_BITS=64</span><br><span class="line"></span><br><span class="line">CONFORMING TO</span><br><span class="line">       SUSv2, POSIX.1-2001.</span><br><span class="line"></span><br><span class="line">fseek(stream,0,SEEK_END);</span><br></pre></td></tr></table></figure>
+
+<h1 id="附加函数"><a href="#附加函数" class="headerlink" title="附加函数"></a>附加函数</h1><h2 id="getline"><a href="#getline" class="headerlink" title="getline"></a>getline</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#define _GNU_SOURCE</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">ssize_t getline(char **lineptr, size_t *n, FILE *stream);</span><br><span class="line">makefile</span><br><span class="line">CFLAGS+=-D_GNU_SOURCE</span><br></pre></td></tr></table></figure>
+
+<h2 id="临时文件"><a href="#临时文件" class="headerlink" title="临时文件"></a>临时文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">char *tmpnam(char *s);</span><br><span class="line">FILE *tmpfile(void);</span><br></pre></td></tr></table></figure>
+
+<h2 id="fflush"><a href="#fflush" class="headerlink" title="fflush"></a>fflush</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int fflush(FILE *stream);</span><br><span class="line">返回值</span><br><span class="line">Upon successful completion 0 is returned.  Otherwise, EOF is returned and  errno  is  set  to  indicate  the</span><br><span class="line">error.</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.padparadccha.cn/2020/09/24/fileno/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1039,7 +1192,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1052,7 +1205,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
