@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="文件IO简介 (效率)1.文件IO也称不带缓冲的I/O(unbuffered)。不带缓冲指的是每个read, write都调用内核中的一个系统调用。2.遵循POSIX相关标准，任何兼容POSIX标准的操作系统上都支持文件I/O。3.读写文件时, 每次操作都会执行相关系统调用, 好处是直接读写实际文件，坏处是频繁的系统调用会增加系统开销。 原子操作–&amp;gt; 打开文件 + 移动到末尾考虑一个进程，它">
+<meta name="description" content="文件IO简介1.文件IO也称不带缓冲的I/O(unbuffered)。不带缓冲指的是每个read, write都调用内核中的一个系统调用。2.遵循POSIX相关标准，任何兼容POSIX标准的操作系统上都支持文件I/O。3.读写文件时, 每次操作都会执行相关系统调用, 好处是直接读写实际文件，坏处是频繁的系统调用会增加系统开销。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件IO--fileIO">
 <meta property="og:url" content="http://www.paragarden,cn/2020/10/12/fileIO/index.html">
 <meta property="og:site_name" content="One">
-<meta property="og:description" content="文件IO简介 (效率)1.文件IO也称不带缓冲的I/O(unbuffered)。不带缓冲指的是每个read, write都调用内核中的一个系统调用。2.遵循POSIX相关标准，任何兼容POSIX标准的操作系统上都支持文件I/O。3.读写文件时, 每次操作都会执行相关系统调用, 好处是直接读写实际文件，坏处是频繁的系统调用会增加系统开销。 原子操作–&amp;gt; 打开文件 + 移动到末尾考虑一个进程，它">
+<meta property="og:description" content="文件IO简介1.文件IO也称不带缓冲的I/O(unbuffered)。不带缓冲指的是每个read, write都调用内核中的一个系统调用。2.遵循POSIX相关标准，任何兼容POSIX标准的操作系统上都支持文件I/O。3.读写文件时, 每次操作都会执行相关系统调用, 好处是直接读写实际文件，坏处是频繁的系统调用会增加系统开销。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://www.paragarden/images/fileIO01.png">
-<meta property="og:updated_time" content="2020-10-12T07:52:56.217Z">
+<meta property="og:updated_time" content="2020-10-12T07:53:54.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件IO--fileIO">
-<meta name="twitter:description" content="文件IO简介 (效率)1.文件IO也称不带缓冲的I/O(unbuffered)。不带缓冲指的是每个read, write都调用内核中的一个系统调用。2.遵循POSIX相关标准，任何兼容POSIX标准的操作系统上都支持文件I/O。3.读写文件时, 每次操作都会执行相关系统调用, 好处是直接读写实际文件，坏处是频繁的系统调用会增加系统开销。 原子操作–&amp;gt; 打开文件 + 移动到末尾考虑一个进程，它">
+<meta name="twitter:description" content="文件IO简介1.文件IO也称不带缓冲的I/O(unbuffered)。不带缓冲指的是每个read, write都调用内核中的一个系统调用。2.遵循POSIX相关标准，任何兼容POSIX标准的操作系统上都支持文件I/O。3.读写文件时, 每次操作都会执行相关系统调用, 好处是直接读写实际文件，坏处是频繁的系统调用会增加系统开销。">
 <meta name="twitter:image" content="http://www.paragarden/images/fileIO01.png">
 
 
@@ -331,7 +331,9 @@
       
 
       
-        <h1 id="文件IO简介-效率"><a href="#文件IO简介-效率" class="headerlink" title="文件IO简介 (效率)"></a>文件IO简介 (效率)</h1><p>1.文件IO也称不带缓冲的I/O(unbuffered)。不带缓冲指的是每个read, write都调用内核中的一个系统调用。<br>2.遵循POSIX相关标准，任何兼容POSIX标准的操作系统上都支持文件I/O。<br>3.读写文件时, 每次操作都会执行相关系统调用, 好处是直接读写实际文件，坏处是频繁的系统调用会增加系统开销。</p>
+        <h1 id="文件IO简介"><a href="#文件IO简介" class="headerlink" title="文件IO简介"></a>文件IO简介</h1><p>1.文件IO也称不带缓冲的I/O(unbuffered)。不带缓冲指的是每个read, write都调用内核中的一个系统调用。<br>2.遵循POSIX相关标准，任何兼容POSIX标准的操作系统上都支持文件I/O。<br>3.读写文件时, 每次操作都会执行相关系统调用, 好处是直接读写实际文件，坏处是频繁的系统调用会增加系统开销。</p>
+<a id="more"></a>
+
 <h1 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h1><p>–&gt; 打开文件 + 移动到末尾<br>考虑一个进程，它将数据添加到一个文件尾端。早期的 unix版本并不支持open的O_APPEND选项，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (lseek(fd, 0L, 2) &lt; 0)</span><br><span class="line">	err_sys(&quot;lseek error&quot;);</span><br><span class="line">if (write(fd, buff, 100) != 100)</span><br><span class="line">	err_sys(&quot;write error&quot;);</span><br></pre></td></tr></table></figure>
 
@@ -517,7 +519,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件IO简介-效率"><span class="nav-number">1.</span> <span class="nav-text">文件IO简介 (效率)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原子操作"><span class="nav-number">2.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重定向-dup、dup2"><span class="nav-number">3.</span> <span class="nav-text">重定向 dup、dup2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数-dup、dup2"><span class="nav-number">3.1.</span> <span class="nav-text">函数 dup、dup2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入重定向"><span class="nav-number">3.2.</span> <span class="nav-text">输入重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出重定向"><span class="nav-number">3.3.</span> <span class="nav-text">输出重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令-gt-gt-文件-2-gt-amp-1-的由来"><span class="nav-number">3.4.</span> <span class="nav-text">命令 &gt;&gt; 文件 2&gt;&amp;1 的由来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内容输出至-dev-null"><span class="nav-number">3.5.</span> <span class="nav-text">内容输出至 /dev/null</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件和设备"><span class="nav-number">4.</span> <span class="nav-text">文件和设备</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件IO简介"><span class="nav-number">1.</span> <span class="nav-text">文件IO简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原子操作"><span class="nav-number">2.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重定向-dup、dup2"><span class="nav-number">3.</span> <span class="nav-text">重定向 dup、dup2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数-dup、dup2"><span class="nav-number">3.1.</span> <span class="nav-text">函数 dup、dup2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入重定向"><span class="nav-number">3.2.</span> <span class="nav-text">输入重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出重定向"><span class="nav-number">3.3.</span> <span class="nav-text">输出重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令-gt-gt-文件-2-gt-amp-1-的由来"><span class="nav-number">3.4.</span> <span class="nav-text">命令 &gt;&gt; 文件 2&gt;&amp;1 的由来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内容输出至-dev-null"><span class="nav-number">3.5.</span> <span class="nav-text">内容输出至 /dev/null</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件和设备"><span class="nav-number">4.</span> <span class="nav-text">文件和设备</span></a></li></ol></div>
             
 
           </div>
