@@ -94,17 +94,26 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="description" content="makefile的基本以及动态库和静态库的基本自行百度本文主要将如何用makefile制作动态库和静态库以及使用 main.c  add.c  add.h 文件三个文件 文件存放目录结构 静态库文件静态库文件的制作1234制作.o文件	gcc -c *.c用ar打包生成.a静态库文件	ar cr 静态库的名字(libMytest.a) 生成的所有的.o   静态库文件的调用1.gcc main.c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://www.paragarden,cn/2020/08/10/hello-world/index.html">
+<meta property="og:title" content="makefile制作静态库和动态库">
+<meta property="og:url" content="http://www.paragarden,cn/2021/01/11/2021-01-11/index.html">
 <meta property="og:site_name" content="One">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="makefile的基本以及动态库和静态库的基本自行百度本文主要将如何用makefile制作动态库和静态库以及使用 main.c  add.c  add.h 文件三个文件 文件存放目录结构 静态库文件静态库文件的制作1234制作.o文件	gcc -c *.c用ar打包生成.a静态库文件	ar cr 静态库的名字(libMytest.a) 生成的所有的.o   静态库文件的调用1.gcc main.c">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-06T10:31:03.000Z">
+<meta property="og:image" content="http://www.paragarden/images/2021-01-11/add_c.png">
+<meta property="og:image" content="http://www.paragarden/images/2021-01-11/add_h.png">
+<meta property="og:image" content="http://www.paragarden/images/2021-01-11/main_c.png">
+<meta property="og:image" content="http://www.paragarden/images/2021-01-11/tree.png">
+<meta property="og:image" content="http://www.paragarden/images/2021-01-11/a.png">
+<meta property="og:image" content="http://www.paragarden/images/2021-01-11/make_a.png">
+<meta property="og:image" content="http://www.paragarden/images/2021-01-11/so.png">
+<meta property="og:image" content="http://www.paragarden/images/2021-01-11/make_so.png">
+<meta property="og:updated_time" content="2021-01-12T00:43:54.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="makefile制作静态库和动态库">
+<meta name="twitter:description" content="makefile的基本以及动态库和静态库的基本自行百度本文主要将如何用makefile制作动态库和静态库以及使用 main.c  add.c  add.h 文件三个文件 文件存放目录结构 静态库文件静态库文件的制作1234制作.o文件	gcc -c *.c用ar打包生成.a静态库文件	ar cr 静态库的名字(libMytest.a) 生成的所有的.o   静态库文件的调用1.gcc main.c">
+<meta name="twitter:image" content="http://www.paragarden/images/2021-01-11/add_c.png">
 
 
 
@@ -133,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://www.paragarden,cn/2020/08/10/hello-world/">
+  <link rel="canonical" href="http://www.paragarden,cn/2021/01/11/2021-01-11/">
 
 
 
 
 
-  <title>Hello World | One</title>
+  <title>makefile制作静态库和动态库 | One</title>
   
 
 
@@ -262,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.paragarden,cn/2020/08/10/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://www.paragarden,cn/2021/01/11/2021-01-11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="para">
@@ -279,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">makefile制作静态库和动态库</h1>
         
 
         <div class="post-meta">
@@ -291,8 +300,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-10T21:25:00+08:00">
-                2020-08-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-11T19:16:42+08:00">
+                2021-01-11
               </time>
             
 
@@ -329,20 +338,20 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>makefile的基本以及动态库和静态库的基本自行百度<br>本文主要将如何用makefile制作动态库和静态库以及使用</p>
+<h1 id="main-c-add-c-add-h-文件"><a href="#main-c-add-c-add-h-文件" class="headerlink" title="main.c  add.c  add.h 文件"></a>main.c  add.c  add.h 文件</h1><h2 id="三个文件"><a href="#三个文件" class="headerlink" title="三个文件"></a>三个文件</h2><p><img src="/images/2021-01-11/add_c.png" alt="Lena"><br><img src="/images/2021-01-11/add_h.png" alt="Lena"><br><img src="/images/2021-01-11/main_c.png" alt="Lena"></p>
+<h2 id="文件存放目录结构"><a href="#文件存放目录结构" class="headerlink" title="文件存放目录结构"></a>文件存放目录结构</h2><p><img src="/images/2021-01-11/tree.png" alt="Lena"></p>
+<h1 id="静态库文件"><a href="#静态库文件" class="headerlink" title="静态库文件"></a>静态库文件</h1><h2 id="静态库文件的制作"><a href="#静态库文件的制作" class="headerlink" title="静态库文件的制作"></a>静态库文件的制作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">制作.o文件</span><br><span class="line">	gcc -c *.c</span><br><span class="line">用ar打包生成.a静态库文件</span><br><span class="line">	ar cr 静态库的名字(libMytest.a) 生成的所有的.o</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2021-01-11/a.png" alt="Lena"></p>
+<h2 id="静态库文件的调用"><a href="#静态库文件的调用" class="headerlink" title="静态库文件的调用"></a>静态库文件的调用</h2><p>1.gcc main.c lib/libadd.a -I include -o main<br>2.gcc main.c -I include -L lib -l add -o main<br>nm libadd.a<br><img src="/images/2021-01-11/make_a.png" alt="Lena"></p>
+<h1 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h1><h2 id="动态库文件的制作"><a href="#动态库文件的制作" class="headerlink" title="动态库文件的制作"></a>动态库文件的制作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">生成与位置无关的.o文件</span><br><span class="line">	  gcc -fPIC -c *.c</span><br><span class="line">生成.so动态库文件</span><br><span class="line">	  gcc -shared -I include -o lib库名.so *.o</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2021-01-11/so.png" alt="Lena"></p>
+<h2 id="动态库文件的调用"><a href="#动态库文件的调用" class="headerlink" title="动态库文件的调用"></a>动态库文件的调用</h2><p>1.gcc main.c lib/libMyCalc.so -I include -o app 可以直接加绝对路径编译<br>2.gcc main.c -I include -L lib -l MyCalc -o app 需要更新环境变量<br>ldd<br><img src="/images/2021-01-11/make_so.png" alt="Lena"></p>
+<p>注： 第二种需要配置环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LD_LIBRARY_PATH</span><br><span class="line">export LD_LIBRARY_PATH=./lib</span><br><span class="line">vi ~/.bashrc</span><br><span class="line">export LD_LIBRARY_PATH=/home/lib</span><br><span class="line"></span><br><span class="line">1.找到动态库链接器的配置文件 vi /etc/ld.so.conf</span><br><span class="line">2.动态库的路径写到配置文件中</span><br><span class="line">3.更新 sudo ldconfig -v</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
     </div>
@@ -367,8 +376,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/06/T1006/" rel="next" title="Hexo create">
-                <i class="fa fa-chevron-left"></i> Hexo create
+              <a href="/2020/11/13/2020-11-13/" rel="next" title="hexo博客 + nginx + https-ssl">
+                <i class="fa fa-chevron-left"></i> hexo博客 + nginx + https-ssl
               </a>
             
           </div>
@@ -376,10 +385,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/09/09/ssh01/" rel="prev" title="初识ssh">
-                初识ssh <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -502,7 +507,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#main-c-add-c-add-h-文件"><span class="nav-number">1.</span> <span class="nav-text">main.c  add.c  add.h 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三个文件"><span class="nav-number">1.1.</span> <span class="nav-text">三个文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件存放目录结构"><span class="nav-number">1.2.</span> <span class="nav-text">文件存放目录结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#静态库文件"><span class="nav-number">2.</span> <span class="nav-text">静态库文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库文件的制作"><span class="nav-number">2.1.</span> <span class="nav-text">静态库文件的制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库文件的调用"><span class="nav-number">2.2.</span> <span class="nav-text">静态库文件的调用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态库"><span class="nav-number">3.</span> <span class="nav-text">动态库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态库文件的制作"><span class="nav-number">3.1.</span> <span class="nav-text">动态库文件的制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态库文件的调用"><span class="nav-number">3.2.</span> <span class="nav-text">动态库文件的调用</span></a></li></ol></li></ol></div>
             
 
           </div>
