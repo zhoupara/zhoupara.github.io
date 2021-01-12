@@ -94,12 +94,12 @@
 
 
 
-<meta name="description" content="makefile的基本以及动态库和静态库的基本自行百度本文主要将如何用makefile制作动态库和静态库以及使用 main.c  add.c  add.h 文件三个文件 文件存放目录结构 静态库文件静态库文件的制作1234制作.o文件	gcc -c *.c用ar打包生成.a静态库文件	ar cr 静态库的名字(libMytest.a) 生成的所有的.o   静态库文件的调用1.gcc main.c">
+<meta name="description" content="makefile的基本以及动态库和静态库的基本自行百度本文主要将如何用makefile制作动态库和静态库以及使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="makefile制作静态库和动态库">
 <meta property="og:url" content="http://www.paragarden,cn/2021/01/11/2021-01-11/index.html">
 <meta property="og:site_name" content="One">
-<meta property="og:description" content="makefile的基本以及动态库和静态库的基本自行百度本文主要将如何用makefile制作动态库和静态库以及使用 main.c  add.c  add.h 文件三个文件 文件存放目录结构 静态库文件静态库文件的制作1234制作.o文件	gcc -c *.c用ar打包生成.a静态库文件	ar cr 静态库的名字(libMytest.a) 生成的所有的.o   静态库文件的调用1.gcc main.c">
+<meta property="og:description" content="makefile的基本以及动态库和静态库的基本自行百度本文主要将如何用makefile制作动态库和静态库以及使用">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://www.paragarden/images/2021-01-11/add_c.png">
 <meta property="og:image" content="http://www.paragarden/images/2021-01-11/add_h.png">
@@ -109,10 +109,10 @@
 <meta property="og:image" content="http://www.paragarden/images/2021-01-11/make_a.png">
 <meta property="og:image" content="http://www.paragarden/images/2021-01-11/so.png">
 <meta property="og:image" content="http://www.paragarden/images/2021-01-11/make_so.png">
-<meta property="og:updated_time" content="2021-01-12T00:43:54.255Z">
+<meta property="og:updated_time" content="2021-01-12T00:48:35.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="makefile制作静态库和动态库">
-<meta name="twitter:description" content="makefile的基本以及动态库和静态库的基本自行百度本文主要将如何用makefile制作动态库和静态库以及使用 main.c  add.c  add.h 文件三个文件 文件存放目录结构 静态库文件静态库文件的制作1234制作.o文件	gcc -c *.c用ar打包生成.a静态库文件	ar cr 静态库的名字(libMytest.a) 生成的所有的.o   静态库文件的调用1.gcc main.c">
+<meta name="twitter:description" content="makefile的基本以及动态库和静态库的基本自行百度本文主要将如何用makefile制作动态库和静态库以及使用">
 <meta name="twitter:image" content="http://www.paragarden/images/2021-01-11/add_c.png">
 
 
@@ -339,6 +339,8 @@
 
       
         <p>makefile的基本以及动态库和静态库的基本自行百度<br>本文主要将如何用makefile制作动态库和静态库以及使用</p>
+<a id="more"></a>
+
 <h1 id="main-c-add-c-add-h-文件"><a href="#main-c-add-c-add-h-文件" class="headerlink" title="main.c  add.c  add.h 文件"></a>main.c  add.c  add.h 文件</h1><h2 id="三个文件"><a href="#三个文件" class="headerlink" title="三个文件"></a>三个文件</h2><p><img src="/images/2021-01-11/add_c.png" alt="Lena"><br><img src="/images/2021-01-11/add_h.png" alt="Lena"><br><img src="/images/2021-01-11/main_c.png" alt="Lena"></p>
 <h2 id="文件存放目录结构"><a href="#文件存放目录结构" class="headerlink" title="文件存放目录结构"></a>文件存放目录结构</h2><p><img src="/images/2021-01-11/tree.png" alt="Lena"></p>
 <h1 id="静态库文件"><a href="#静态库文件" class="headerlink" title="静态库文件"></a>静态库文件</h1><h2 id="静态库文件的制作"><a href="#静态库文件的制作" class="headerlink" title="静态库文件的制作"></a>静态库文件的制作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">制作.o文件</span><br><span class="line">	gcc -c *.c</span><br><span class="line">用ar打包生成.a静态库文件</span><br><span class="line">	ar cr 静态库的名字(libMytest.a) 生成的所有的.o</span><br></pre></td></tr></table></figure>
