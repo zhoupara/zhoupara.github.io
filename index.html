@@ -260,6 +260,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.paragarden,cn/2021/02/19/2021-02-19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="para">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/02/19/2021-02-19/" itemprop="url">ICMP协议</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-02-19T17:37:50+08:00">
+                2021-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Wireshark抓包ping命令"><a href="#Wireshark抓包ping命令" class="headerlink" title="Wireshark抓包ping命令"></a>Wireshark抓包ping命令</h1><p>过滤规则： ip.addr == 47.114.0.16 and icmp<br>抓包内容： Ethernet II + IP + ICMP<br><img src="/images/2021-02-19/wireshark.png" alt="Lena"></p>
+<p>Ethernet II： 源Mac地址(6字节) 目标mac地址(6字节) 类型(2字节)  共 14字节<br><img src="/images/2021-02-19/mac%E5%B1%82.png" alt="Lena"></p>
+<p>IP: 版本(4位)/首部长度(4位) (1字节) 服务类型TOS(1字节)<br>    总长度(2字节)<br>    标识(2字节)<br>    标志(3位)/片偏移(13位) (2字节)<br>    TTL(1字节) 协议(1字节)<br>    首部校验和(2字节)<br>    源IP地址(4字节)<br>    目标IP地址(4字节)  共 20字节<br><img src="/images/2021-02-19/ip%E6%8A%A5%E6%96%87%E5%A4%B4.png" alt="Lena"></p>
+<p>ICMP：类型(1字节) 代码(1字节)<br>     校验和(2字节)<br>     根据类型和代码不同而不同<br><img src="/images/2021-02-19/ICMP%E6%8A%A5%E6%96%87.png" alt="Lena"></p>
+<h1 id="ICMP协议"><a href="#ICMP协议" class="headerlink" title="ICMP协议"></a>ICMP协议</h1><p>ICMP全称”Internet Control Message Protocol”,互联网控制报文协议。</p>
+<h1 id="ICMP报文的格式"><a href="#ICMP报文的格式" class="headerlink" title="ICMP报文的格式"></a>ICMP报文的格式</h1><p>ICMP报文是封装在IP包里面的，属于网络层。<br><img src="/images/2021-02-19/ICMP%E6%A0%BC%E5%BC%8F.jpg" alt="Lena"></p>
+<h1 id="查询报文类型"><a href="#查询报文类型" class="headerlink" title="查询报文类型"></a>查询报文类型</h1><p>查询报文类型 用于诊断的查询信息.</p>
+<p>类型                代码        状态        描述<br>0 - Echo Reply    0                echo响应 (被程序ping使用）<br>8 - 请求回显        0                Echo请求<br>9 - 路由器通告    0                路由通告<br>10 - 路由器请求    0                路由器的发现/选择/请求<br>13 - 时间戳请求    0                时间戳请求<br>14 - 时间戳应答    0                时间戳应答<br>常见的类型是主动请求为8，主动请求的应答为0</p>
+<h1 id="差错报文类型"><a href="#差错报文类型" class="headerlink" title="差错报文类型"></a>差错报文类型</h1><p>差错报文类型 通知出错原因的错误消息<br>类型 1.2 未分配 保留</p>
+<h2 id="3-目的不可达"><a href="#3-目的不可达" class="headerlink" title="3-目的不可达"></a>3-目的不可达</h2><p>代码 0        目标网络不可达<br>代码 1        目标主机不可达<br>代码 2        目标协议不可达<br>代码 3        目标端口不可达<br>代码 4        要求分段并设置DF flag标志        </p>
+<h2 id="5-重定向"><a href="#5-重定向" class="headerlink" title="5-重定向"></a>5-重定向</h2><p>代码 0        重定向网络<br>代码 1        重定向主机<br>代码 2        基于TOS 的网络重定向<br>代码 3        基于TOS 的主机重定向</p>
+<h2 id="11-ICMP超时"><a href="#11-ICMP超时" class="headerlink" title="11-ICMP超时"></a>11-ICMP超时</h2><p>代码 0        TTL 超时<br>代码 1         分片重组超时</p>
+<h1 id="查询报文应用-ping命令"><a href="#查询报文应用-ping命令" class="headerlink" title="查询报文应用: ping命令"></a>查询报文应用: ping命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ping -c 2 www.padparadccha.cn</span><br><span class="line"></span><br><span class="line">-c 2 收到两次包后，自动退出</span><br><span class="line">-i 3 发送周期 3秒</span><br><span class="line">-s 1024 设置发送包的大小</span><br><span class="line">-t 255 设置TTL值为 255</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/2021-02-19/ping.jpg" alt="Lena"></p>
+<h1 id="差错报文应用-Traceroute命令"><a href="#差错报文应用-Traceroute命令" class="headerlink" title="差错报文应用: Traceroute命令"></a>差错报文应用: Traceroute命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">traceroute www.padparadccha.cn 显示到达目的地的数据包路由</span><br></pre></td></tr></table></figure>
+
+<p>Traceroute程序的设计是利用ICMP及IP header的TTL（Time To Live）栏位（field）</p>
+<blockquote>
+<p>TTL是1的IP datagram（其实，每次送出的为3个40字节的包，包括源地址，目的地址和包发出的时间标签）<br>到目的地，当路径上的第一个路由器（router）收到这个datagram时，它将TTL减1。<br>此时，TTL变为0了，所以该路由器会将此datagram丢掉，<br>并送回一个「ICMP time exceeded」消息（包括发IP包的源地址，IP包的所有内容及路由器的IP地址），<br>traceroute 收到这个消息后，便知道这个路由器存在于这个路径上，<br>接着traceroute 再送出另一个TTL是2 的datagram，发现第2 个路由器……<br>traceroute 每次将送出的datagram的TTL 加1来发现另一个路由器，这个重复的动作一直持续到某个datagram 抵达目的地。</p>
+</blockquote>
+<blockquote>
+<p>当datagram到达目的地后，该主机并不会送回ICMP time exceeded消息，因为它已是目的地了，<br>那么traceroute如何得知目的地到达了呢？Traceroute在送出UDP datagrams到目的地时，<br>它所选择送达的port number 是一个一般应用程序都不会用的号码（30000 以上），<br>所以当此UDP datagram 到达目的地后该主机会送回一个「ICMP port unreachable」的消息，<br>而当traceroute 收到这个消息时，便知道目的地已经到达了。所以traceroute 在Server端也是没有所谓的Daemon 程式。</p>
+</blockquote>
+<p>1.故意设置特殊的TTL，来追踪去往目的地时沿途经过的路由器<br>2.故意设置不分片，从而确定路径的MTU</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.paragarden,cn/2021/01/11/2021-01-11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1367,130 +1511,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.paragarden,cn/2020/08/10/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="para">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/08/10/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-10T21:25:00+08:00">
-                2020-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/08/10/hello-world/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1539,7 +1559,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
