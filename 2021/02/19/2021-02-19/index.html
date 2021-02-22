@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="网络,">
 
 
 
@@ -94,23 +94,24 @@
 
 
 
-<meta name="description" content="Wireshark抓包ping命令过滤规则： ip.addr == 47.114.0.16 and icmp抓包内容： Ethernet II + IP + ICMP Ethernet II： 源Mac地址(6字节) 目标mac地址(6字节) 类型(2字节)  共 14字节 IP: 版本(4位)/首部长度(4位) (1字节) 服务类型TOS(1字节)    总长度(2字节)    标识(2字节)">
+<meta name="description" content="ICMP协议ICMP全称”Internet Control Message Protocol”,互联网控制报文协议。">
+<meta name="keywords" content="网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ICMP协议">
 <meta property="og:url" content="http://www.paragarden,cn/2021/02/19/2021-02-19/index.html">
 <meta property="og:site_name" content="One">
-<meta property="og:description" content="Wireshark抓包ping命令过滤规则： ip.addr == 47.114.0.16 and icmp抓包内容： Ethernet II + IP + ICMP Ethernet II： 源Mac地址(6字节) 目标mac地址(6字节) 类型(2字节)  共 14字节 IP: 版本(4位)/首部长度(4位) (1字节) 服务类型TOS(1字节)    总长度(2字节)    标识(2字节)">
+<meta property="og:description" content="ICMP协议ICMP全称”Internet Control Message Protocol”,互联网控制报文协议。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://www.paragarden/images/2021-02-19/wireshark.png">
 <meta property="og:image" content="http://www.paragarden/images/2021-02-19/mac%E5%B1%82.png">
 <meta property="og:image" content="http://www.paragarden/images/2021-02-19/ip%E6%8A%A5%E6%96%87%E5%A4%B4.png">
 <meta property="og:image" content="http://www.paragarden/images/2021-02-19/ICMP%E6%8A%A5%E6%96%87.png">
 <meta property="og:image" content="http://www.paragarden/images/2021-02-19/ICMP%E6%A0%BC%E5%BC%8F.jpg">
-<meta property="og:image" content="http://www.paragarden/images/2021-02-19/ping.jpg">
-<meta property="og:updated_time" content="2021-02-22T08:13:00.231Z">
+<meta property="og:image" content="http://www.paragarden/images/2021-02-19/ping.png">
+<meta property="og:updated_time" content="2021-02-22T08:26:08.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ICMP协议">
-<meta name="twitter:description" content="Wireshark抓包ping命令过滤规则： ip.addr == 47.114.0.16 and icmp抓包内容： Ethernet II + IP + ICMP Ethernet II： 源Mac地址(6字节) 目标mac地址(6字节) 类型(2字节)  共 14字节 IP: 版本(4位)/首部长度(4位) (1字节) 服务类型TOS(1字节)    总长度(2字节)    标识(2字节)">
+<meta name="twitter:description" content="ICMP协议ICMP全称”Internet Control Message Protocol”,互联网控制报文协议。">
 <meta name="twitter:image" content="http://www.paragarden/images/2021-02-19/wireshark.png">
 
 
@@ -336,11 +337,20 @@
       
 
       
-        <h1 id="Wireshark抓包ping命令"><a href="#Wireshark抓包ping命令" class="headerlink" title="Wireshark抓包ping命令"></a>Wireshark抓包ping命令</h1><p>过滤规则： ip.addr == 47.114.0.16 and icmp<br>抓包内容： Ethernet II + IP + ICMP<br><img src="/images/2021-02-19/wireshark.png" alt="Lena"></p>
-<p>Ethernet II： 源Mac地址(6字节) 目标mac地址(6字节) 类型(2字节)  共 14字节<br><img src="/images/2021-02-19/mac%E5%B1%82.png" alt="Lena"></p>
-<p>IP: 版本(4位)/首部长度(4位) (1字节) 服务类型TOS(1字节)<br>    总长度(2字节)<br>    标识(2字节)<br>    标志(3位)/片偏移(13位) (2字节)<br>    TTL(1字节) 协议(1字节)<br>    首部校验和(2字节)<br>    源IP地址(4字节)<br>    目标IP地址(4字节)  共 20字节<br><img src="/images/2021-02-19/ip%E6%8A%A5%E6%96%87%E5%A4%B4.png" alt="Lena"></p>
-<p>ICMP：类型(1字节) 代码(1字节)<br>     校验和(2字节)<br>     根据类型和代码不同而不同<br><img src="/images/2021-02-19/ICMP%E6%8A%A5%E6%96%87.png" alt="Lena"></p>
-<h1 id="ICMP协议"><a href="#ICMP协议" class="headerlink" title="ICMP协议"></a>ICMP协议</h1><p>ICMP全称”Internet Control Message Protocol”,互联网控制报文协议。</p>
+        <h1 id="ICMP协议"><a href="#ICMP协议" class="headerlink" title="ICMP协议"></a>ICMP协议</h1><p>ICMP全称”Internet Control Message Protocol”,互联网控制报文协议。</p>
+<a id="more"></a>
+
+<h1 id="Wireshark抓包ping命令"><a href="#Wireshark抓包ping命令" class="headerlink" title="Wireshark抓包ping命令"></a>Wireshark抓包ping命令</h1><p>过滤规则： ip.addr == 47.114.0.16 and icmp<br>抓包内容： Ethernet II + IP + ICMP</p>
+<p><img src="/images/2021-02-19/wireshark.png" alt="Lena"></p>
+<h2 id="Ethernet-II"><a href="#Ethernet-II" class="headerlink" title="Ethernet II"></a>Ethernet II</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ethernet II： 源Mac地址(6字节) 目标mac地址(6字节) 类型(2字节)  共 14字节</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/2021-02-19/mac%E5%B1%82.png" alt="Lena"></p>
+<h2 id="IP报文头"><a href="#IP报文头" class="headerlink" title="IP报文头"></a>IP报文头</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">IP: 版本(4位)/首部长度(4位) (1字节) 服务类型TOS(1字节) </span><br><span class="line">	总长度(2字节)</span><br><span class="line">	标识(2字节)</span><br><span class="line">	标志(3位)/片偏移(13位) (2字节)</span><br><span class="line">	TTL(1字节) 协议(1字节)</span><br><span class="line">	首部校验和(2字节)</span><br><span class="line">	源IP地址(4字节)</span><br><span class="line">	目标IP地址(4字节)  共 20字节</span><br></pre></td></tr></table></figure>
+
+<h2 id="ICMP报文"><a href="#ICMP报文" class="headerlink" title="ICMP报文"></a>ICMP报文</h2><p><img src="/images/2021-02-19/ip%E6%8A%A5%E6%96%87%E5%A4%B4.png" alt="Lena"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ICMP：类型(1字节) 代码(1字节)</span><br><span class="line">	 校验和(2字节)</span><br><span class="line">	 根据类型和代码不同而不同</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/2021-02-19/ICMP%E6%8A%A5%E6%96%87.png" alt="Lena"></p>
 <h1 id="ICMP报文的格式"><a href="#ICMP报文的格式" class="headerlink" title="ICMP报文的格式"></a>ICMP报文的格式</h1><p>ICMP报文是封装在IP包里面的，属于网络层。<br><img src="/images/2021-02-19/ICMP%E6%A0%BC%E5%BC%8F.jpg" alt="Lena"></p>
 <h1 id="查询报文类型"><a href="#查询报文类型" class="headerlink" title="查询报文类型"></a>查询报文类型</h1><p>查询报文类型 用于诊断的查询信息.</p>
 <p>类型                代码        状态        描述<br>0 - Echo Reply    0                echo响应 (被程序ping使用）<br>8 - 请求回显        0                Echo请求<br>9 - 路由器通告    0                路由通告<br>10 - 路由器请求    0                路由器的发现/选择/请求<br>13 - 时间戳请求    0                时间戳请求<br>14 - 时间戳应答    0                时间戳应答<br>常见的类型是主动请求为8，主动请求的应答为0</p>
@@ -350,17 +360,17 @@
 <h2 id="11-ICMP超时"><a href="#11-ICMP超时" class="headerlink" title="11-ICMP超时"></a>11-ICMP超时</h2><p>代码 0        TTL 超时<br>代码 1         分片重组超时</p>
 <h1 id="查询报文应用-ping命令"><a href="#查询报文应用-ping命令" class="headerlink" title="查询报文应用: ping命令"></a>查询报文应用: ping命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ping -c 2 www.padparadccha.cn</span><br><span class="line"></span><br><span class="line">-c 2 收到两次包后，自动退出</span><br><span class="line">-i 3 发送周期 3秒</span><br><span class="line">-s 1024 设置发送包的大小</span><br><span class="line">-t 255 设置TTL值为 255</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/2021-02-19/ping.jpg" alt="Lena"></p>
+<p><img src="/images/2021-02-19/ping.png" alt="Lena"></p>
 <h1 id="差错报文应用-Traceroute命令"><a href="#差错报文应用-Traceroute命令" class="headerlink" title="差错报文应用: Traceroute命令"></a>差错报文应用: Traceroute命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">traceroute www.padparadccha.cn 显示到达目的地的数据包路由</span><br></pre></td></tr></table></figure>
 
 <p>Traceroute程序的设计是利用ICMP及IP header的TTL（Time To Live）栏位（field）</p>
 <blockquote>
-<p>TTL是1的IP datagram（其实，每次送出的为3个40字节的包，包括源地址，目的地址和包发出的时间标签）<br>到目的地，当路径上的第一个路由器（router）收到这个datagram时，它将TTL减1。<br>此时，TTL变为0了，所以该路由器会将此datagram丢掉，<br>并送回一个「ICMP time exceeded」消息（包括发IP包的源地址，IP包的所有内容及路由器的IP地址），<br>traceroute 收到这个消息后，便知道这个路由器存在于这个路径上，<br>接着traceroute 再送出另一个TTL是2 的datagram，发现第2 个路由器……<br>traceroute 每次将送出的datagram的TTL 加1来发现另一个路由器，这个重复的动作一直持续到某个datagram 抵达目的地。</p>
+<p>TTL是1的IP datagram（其实，每次送出的为3个40字节的包，包括源地址，目的地址和包发出的时间标签）到目的地，当路径上的第一个路由器（router）收到这个datagram时，它将TTL减1。此时，TTL变为0了，所以该路由器会将此datagram丢掉，并送回一个「ICMP time exceeded」消息（包括发IP包的源地址，IP包的所有内容及路由器的IP地址），traceroute 收到这个消息后，便知道这个路由器存在于这个路径上，接着traceroute 再送出另一个TTL是2 的datagram，发现第2 个路由器…… traceroute 每次将送出的datagram的TTL 加1来发现另一个路由器，这个重复的动作一直持续到某个datagram 抵达目的地。</p>
 </blockquote>
 <blockquote>
-<p>当datagram到达目的地后，该主机并不会送回ICMP time exceeded消息，因为它已是目的地了，<br>那么traceroute如何得知目的地到达了呢？Traceroute在送出UDP datagrams到目的地时，<br>它所选择送达的port number 是一个一般应用程序都不会用的号码（30000 以上），<br>所以当此UDP datagram 到达目的地后该主机会送回一个「ICMP port unreachable」的消息，<br>而当traceroute 收到这个消息时，便知道目的地已经到达了。所以traceroute 在Server端也是没有所谓的Daemon 程式。</p>
+<p>当datagram到达目的地后，该主机并不会送回ICMP time exceeded消息，因为它已是目的地了，那么traceroute如何得知目的地到达了呢？Traceroute在送出UDP datagrams到目的地时，它所选择送达的port number 是一个一般应用程序都不会用的号码（30000 以上），所以当此UDP datagram 到达目的地后该主机会送回一个「ICMP port unreachable」的消息，而当traceroute 收到这个消息时，便知道目的地已经到达了。所以traceroute 在Server端也是没有所谓的Daemon 程式。</p>
 </blockquote>
-<p>1.故意设置特殊的TTL，来追踪去往目的地时沿途经过的路由器<br>2.故意设置不分片，从而确定路径的MTU</p>
+<h2 id="Traceroute规则"><a href="#Traceroute规则" class="headerlink" title="Traceroute规则"></a>Traceroute规则</h2><p>1.故意设置特殊的TTL，来追踪去往目的地时沿途经过的路由器<br>2.故意设置不分片，从而确定路径的MTU</p>
 
       
     </div>
@@ -375,6 +385,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag"># 网络</a>
+          
+        </div>
       
 
       
@@ -481,7 +497,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
@@ -516,7 +532,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Wireshark抓包ping命令"><span class="nav-number">1.</span> <span class="nav-text">Wireshark抓包ping命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP协议"><span class="nav-number">2.</span> <span class="nav-text">ICMP协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP报文的格式"><span class="nav-number">3.</span> <span class="nav-text">ICMP报文的格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询报文类型"><span class="nav-number">4.</span> <span class="nav-text">查询报文类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#差错报文类型"><span class="nav-number">5.</span> <span class="nav-text">差错报文类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-目的不可达"><span class="nav-number">5.1.</span> <span class="nav-text">3-目的不可达</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-重定向"><span class="nav-number">5.2.</span> <span class="nav-text">5-重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-ICMP超时"><span class="nav-number">5.3.</span> <span class="nav-text">11-ICMP超时</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询报文应用-ping命令"><span class="nav-number">6.</span> <span class="nav-text">查询报文应用: ping命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#差错报文应用-Traceroute命令"><span class="nav-number">7.</span> <span class="nav-text">差错报文应用: Traceroute命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP协议"><span class="nav-number">1.</span> <span class="nav-text">ICMP协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Wireshark抓包ping命令"><span class="nav-number">2.</span> <span class="nav-text">Wireshark抓包ping命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ethernet-II"><span class="nav-number">2.1.</span> <span class="nav-text">Ethernet II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP报文头"><span class="nav-number">2.2.</span> <span class="nav-text">IP报文头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ICMP报文"><span class="nav-number">2.3.</span> <span class="nav-text">ICMP报文</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP报文的格式"><span class="nav-number">3.</span> <span class="nav-text">ICMP报文的格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询报文类型"><span class="nav-number">4.</span> <span class="nav-text">查询报文类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#差错报文类型"><span class="nav-number">5.</span> <span class="nav-text">差错报文类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-目的不可达"><span class="nav-number">5.1.</span> <span class="nav-text">3-目的不可达</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-重定向"><span class="nav-number">5.2.</span> <span class="nav-text">5-重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-ICMP超时"><span class="nav-number">5.3.</span> <span class="nav-text">11-ICMP超时</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询报文应用-ping命令"><span class="nav-number">6.</span> <span class="nav-text">查询报文应用: ping命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#差错报文应用-Traceroute命令"><span class="nav-number">7.</span> <span class="nav-text">差错报文应用: Traceroute命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Traceroute规则"><span class="nav-number">7.1.</span> <span class="nav-text">Traceroute规则</span></a></li></ol></li></ol></div>
             
 
           </div>
