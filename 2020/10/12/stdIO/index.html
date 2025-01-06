@@ -2,14 +2,27 @@
 
 
 
-  
 
-
-<html class="theme-next gemini use-motion" lang="en">
+<html class="theme-next gemini" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
 <meta name="theme-color" content="#222">
 
 
@@ -84,6 +97,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="One" type="application/atom+xml">
+
 
 
 
@@ -101,7 +116,7 @@
 <meta property="og:site_name" content="One">
 <meta property="og:description" content="标准IO简介1.标准I/O是ANSI C建立的一个标准I/O模型, 是一个标准函数包和stdio.h头文件中的定义, 不依赖系统内核, 所以移植性强。2.遵循ANSI C相关标准。需要开发环境中有标准I/O库, 标准I/O就可以使用。3.在文件IO的基础上封装文件描述符并维护了缓冲机制。4.fopen函数 打开一个文件, 并且建立了一个流缓冲(用户空间，读写模式下建立两个缓冲区), 还创建了一个包">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-10-12T07:53:46.608Z">
+<meta property="og:updated_time" content="2020-10-12T07:53:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="标准IO--stdIO">
 <meta name="twitter:description" content="标准IO简介1.标准I/O是ANSI C建立的一个标准I/O模型, 是一个标准函数包和stdio.h头文件中的定义, 不依赖系统内核, 所以移植性强。2.遵循ANSI C相关标准。需要开发环境中有标准I/O库, 标准I/O就可以使用。3.在文件IO的基础上封装文件描述符并维护了缓冲机制。4.fopen函数 打开一个文件, 并且建立了一个流缓冲(用户空间，读写模式下建立两个缓冲区), 还创建了一个包">
@@ -113,10 +128,10 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: true,
+    motion: false,
     duoshuo: {
       userId: '0',
       author: 'Author'
@@ -462,7 +477,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -475,7 +490,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
@@ -483,6 +498,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">
@@ -519,6 +541,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -533,7 +562,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -541,6 +570,7 @@
 </div>
 
 
+<!--
 <div class="powered-by">
   Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
@@ -551,6 +581,7 @@
     NexT.Gemini
   </a>
 </div>
+-->
 
 
         
@@ -559,11 +590,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
   </div>
@@ -586,6 +612,8 @@
 
   
 
+
+  
 
 
 
@@ -614,6 +642,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
@@ -693,5 +724,16 @@
 
   
 
-</body>
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>
+
+<!-- 页面点击小红心 -->
+<!--
+<script type="text/javascript" src="/js/src/click.js"></script>
+-->

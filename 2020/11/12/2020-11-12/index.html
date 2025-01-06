@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="One" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="前言之前博客都是放在github page上进行部署，现在用nginx部署在自己的服务器上前面的基本配置，简单略过，详细可以参考hexo官方文档本篇主要在服务器建立一个裸仓库，本地将静态页面上传到服务器，用nginx进行部署">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo博客部署到服务器">
+<meta property="og:url" content="http://www.paragarden,cn/2020/11/12/2020-11-12/index.html">
+<meta property="og:site_name" content="One">
+<meta property="og:description" content="前言之前博客都是放在github page上进行部署，现在用nginx部署在自己的服务器上前面的基本配置，简单略过，详细可以参考hexo官方文档本篇主要在服务器建立一个裸仓库，本地将静态页面上传到服务器，用nginx进行部署">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://www.paragarden/images/pic01.png">
+<meta property="og:image" content="http://www.paragarden/images/2020_11_12_pic02.png">
+<meta property="og:image" content="http://www.paragarden/images/2020_11_12_pic03.png">
+<meta property="og:updated_time" content="2020-11-12T06:57:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo博客部署到服务器">
+<meta name="twitter:description" content="前言之前博客都是放在github page上进行部署，现在用nginx部署在自己的服务器上前面的基本配置，简单略过，详细可以参考hexo官方文档本篇主要在服务器建立一个裸仓库，本地将静态页面上传到服务器，用nginx进行部署">
+<meta name="twitter:image" content="http://www.paragarden/images/pic01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.paragarden,cn/2020/11/12/2020-11-12/">
+
+
+
+
+
+  <title>hexo博客部署到服务器 | One</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">One</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Only One</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.paragarden,cn/2020/11/12/2020-11-12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="para">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hexo博客部署到服务器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-12T14:01:38+08:00">
+                2020-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前博客都是放在github page上进行部署，现在用nginx部署在自己的服务器上<br>前面的基本配置，简单略过，详细可以参考hexo官方文档<br>本篇主要在服务器建立一个裸仓库，本地将静态页面上传到服务器，用nginx进行部署</p>
+<a id="more"></a>
+<h1 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h1><h2 id="本地安装-node"><a href="#本地安装-node" class="headerlink" title="本地安装 node"></a>本地安装 node</h2><p>1.node官网下载 推荐使用nvm<br>2.配置全局变量<br>3.安装hexo-cli</p>
+<h2 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h2><p>1.初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init myblo &amp;&amp; myblog</span><br><span class="line">npm i</span><br></pre></td></tr></table></figure>
+
+<p>2.下载主题<br>git clone <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">https://github.com/iissnan/hexo-theme-next</a> themes/next<br>3.本地执行hexo项目 npm start<br>添加 start脚本<br><img src="/images/pic01.png" alt="Lena"><br>4.验证效果</p>
+<h2 id="git环境搭建"><a href="#git环境搭建" class="headerlink" title="git环境搭建"></a>git环境搭建</h2><p>1.git 安装<br>2.ssh 认证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;yourname&quot;</span><br><span class="line">git config --global user.email youremail@example.com</span><br><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br><span class="line">git config --global core.autocrlf false  // 禁用自动转换，这个不设置后面上传时会出现警告，如下</span><br></pre></td></tr></table></figure>
+
+<h1 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h1><h2 id="搭建远程Git私库"><a href="#搭建远程Git私库" class="headerlink" title="搭建远程Git私库"></a>搭建远程Git私库</h2><p>1.登录远程服务器<br>2.安装git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git --version // 如无，则安装</span><br><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel</span><br><span class="line">yum install -y git</span><br></pre></td></tr></table></figure>
+
+<p>3.创建用户并配置其仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">useradd git</span><br><span class="line">passwd git // 设置密码</span><br><span class="line">su git // 这步很重要，不切换用户后面会很麻烦</span><br><span class="line">cd /home/git/</span><br><span class="line">mkdir -p projects/blog // 项目存在的真实目录</span><br><span class="line">mkdir repos &amp;&amp; cd repos</span><br><span class="line">git init --bare blog.git // 创建一个裸露的仓库</span><br><span class="line">cd blog.git/hooks</span><br><span class="line">vi post-receive // 创建 hook 钩子函数，输入了内容如下</span><br><span class="line">#输入完成后</span><br><span class="line">chmod +x post-receive</span><br><span class="line">exit // 退出到 root 登录</span><br><span class="line">chown -R git:git /home/git/repos/blog.git // 添加权限</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file  post-receive:</span><br><span class="line">#!/bin/sh</span><br><span class="line">git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</span><br><span class="line">#将传到/home/git/repos/blog.git地址的文件，放到/home/git/projects/blog</span><br></pre></td></tr></table></figure>
+
+<p>4.测试git仓库是否可用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@server_ip:/home/git/repos/blog.git</span><br></pre></td></tr></table></figure>
+
+<p>5.本地电脑 建立ssh信任关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i C:/Users/yourname/.ssh/id_rsa.pub git@server_ip</span><br><span class="line">ssh git@server_ip // 测试能否登录</span><br></pre></td></tr></table></figure>
+
+<p>6.禁用git用户的shell登录权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/shells // 查看 git-shell 是否在登录方式里面</span><br><span class="line">which git-shell // 查看是否安装</span><br><span class="line">vi /etc/shells</span><br><span class="line">#添加上2步显示出来的路径，通常在 /usr/bin/git-shell</span><br></pre></td></tr></table></figure>
+
+<p>修改/etc/passwd中的权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 将原来的</span><br><span class="line">git:x:1000:1000::/home/git:/bin/bash</span><br><span class="line"></span><br><span class="line">// 修改为</span><br><span class="line">git:x:1000:1000:,,,:/home/git:/usr/bin/git-shell</span><br></pre></td></tr></table></figure>
+
+<h1 id="搭建nginx服务器"><a href="#搭建nginx服务器" class="headerlink" title="搭建nginx服务器"></a>搭建nginx服务器</h1><h2 id="下载安装-nginx"><a href="#下载安装-nginx" class="headerlink" title="下载安装 nginx"></a>下载安装 nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src</span><br><span class="line">wget http://nginx.org/download/nginx-1.15.2.tar.gz</span><br><span class="line">tar xzvf nginx-1.15.2.tar.gz</span><br><span class="line">cd nginx-1.15.2</span><br><span class="line">./configure // 如果后面还想要配置 SSL 协议，就执行后面一句！</span><br><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-file-aio --with-http_realip_module</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">alias nginx=&apos;/usr/local/nginx/sbin/nginx&apos; // 为 nginx 取别名，后面可直接用</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置nginx文件"><a href="#配置nginx文件" class="headerlink" title="配置nginx文件"></a>配置nginx文件</h2><p>1.先启动是否安装成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx </span><br><span class="line">#浏览器查看 server_ip，默认是 80 端口</span><br></pre></td></tr></table></figure>
+
+<p>2.修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop // 先停止nginx</span><br><span class="line">cd /usr/local/nginx/conf</span><br><span class="line">vi nginx.conf</span><br><span class="line">修改 root 解析路径, 如下图</span><br><span class="line">同时将 user 改为 root, 不然nginx无法访问 /home/git/projects/blog</span><br><span class="line">nginx</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/2020_11_12_pic02.png" alt="Lena"></p>
+<h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><h2 id="本地配置-config-yml文件"><a href="#本地配置-config-yml文件" class="headerlink" title="本地配置 _config.yml文件"></a>本地配置 _config.yml文件</h2><p><img src="/images/2020_11_12_pic03.png" alt="Lena"></p>
+<h2 id="在package-json-中添加npm脚本"><a href="#在package-json-中添加npm脚本" class="headerlink" title="在package.json 中添加npm脚本"></a>在package.json 中添加npm脚本</h2><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>本地调试 npm start<br>上次服务器 npm run deply</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/12/fileIO/" rel="next" title="文件IO--fileIO">
+                <i class="fa fa-chevron-left"></i> 文件IO--fileIO
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/13/2020-11-13/" rel="prev" title="hexo博客 + nginx + https-ssl">
+                hexo博客 + nginx + https-ssl <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="para">
+          <p class="site-author-name" itemprop="name">para</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本配置"><span class="nav-number">2.</span> <span class="nav-text">基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地安装-node"><span class="nav-number">2.1.</span> <span class="nav-text">本地安装 node</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化hexo"><span class="nav-number">2.2.</span> <span class="nav-text">初始化hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git环境搭建"><span class="nav-number">2.3.</span> <span class="nav-text">git环境搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务器配置"><span class="nav-number">3.</span> <span class="nav-text">服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建远程Git私库"><span class="nav-number">3.1.</span> <span class="nav-text">搭建远程Git私库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建nginx服务器"><span class="nav-number">4.</span> <span class="nav-text">搭建nginx服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装-nginx"><span class="nav-number">4.1.</span> <span class="nav-text">下载安装 nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置nginx文件"><span class="nav-number">4.2.</span> <span class="nav-text">配置nginx文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布"><span class="nav-number">5.</span> <span class="nav-text">发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地配置-config-yml文件"><span class="nav-number">5.1.</span> <span class="nav-text">本地配置 _config.yml文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在package-json-中添加npm脚本"><span class="nav-number">5.2.</span> <span class="nav-text">在package.json 中添加npm脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接"><span class="nav-number">5.3.</span> <span class="nav-text">链接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">para</span>
+</div>
+
+
+<!--
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+-->
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<!--
+<script type="text/javascript" src="/js/src/click.js"></script>
+-->
